@@ -11,8 +11,8 @@ import {API_KEY} from './utility/api';
 
 
 export default function App(){
-    const [city, setCity] = useState('oakville');
-    const [url, setUrl] = useState(`https://api.weatherbit.io/v2.0/current?city=${city},ontario&key=${API_KEY}`);
+    const [city, setCity] = useState('');
+    const [url, setUrl] = useState(`https://api.weatherbit.io/v2.0/current?city=oakville,ontario&key=${API_KEY}`);
     const [realTimeWeather, setRealTimeWeather] = useState([]);
     const [isError, setIsError] = useState(false);
 
