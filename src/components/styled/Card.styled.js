@@ -50,4 +50,10 @@ export const StyledCard = styled.section`
         text-align: center;
         font-size: 1.2rem;
     }
+
+    @media only screen and (min-width: 768px){
+        .card-container{
+            max-width: 700px;
+        }
+    }
 `

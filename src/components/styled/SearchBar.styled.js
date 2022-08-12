@@ -30,4 +30,8 @@ export const StyledSearchBar = styled.div`
         border: none;
         border-radius: 30px;
     }
+
+    @media only screen and (min-width: 768px){
+        max-width: 700px;
+    }
 `
