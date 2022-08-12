@@ -46,4 +46,8 @@ export const StyledCard = styled.section`
     .card-sub-container > * {
         margin: .5rem 0;
     }
+    .card-error{
+        text-align: center;
+        font-size: 1.2rem;
+    }
 `

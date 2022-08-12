@@ -1,26 +1,34 @@
 import React,{useEffect, useState} from 'react';
-import {useAxios} from './hooks/useAxios';
-import {API_KEY} from './utility/api';
+import axios from 'axios';
 
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Card from './components/Card';
 import './style/styles.css';
 
+import {API_KEY} from './utility/api';
+
 
 
 export default function App(){
-    const BASE_URL = `https://api.weatherbit.io/v2.0/current?city=oakville,Ontario&key=${API_KEY}`;
-    const [data]     = useAxios(BASE_URL);
-    const [weather, setWeather] = useState([]);
+    const [city, setCity] = useState('oakville');
+    const [url, setUrl] = useState(`https://api.weatherbit.io/v2.0/current?city=${city},ontario&key=${API_KEY}`);
+    const [realTimeWeather, setRealTimeWeather] = useState([]);
+    const [isError, setIsError] = useState(false);
 
 
     useEffect(() => {
-        setWeather(data);
-    },[data]);
+        axios.get(url)
+            .then(res => setRealTimeWeather(res.data.data[0]))
+            .catch(() => {
+                console.log();
+                setIsError(true);
+            })
+    },[url])
 
-    const onSearch = (e) => {
-
+    const onSearch = (city, state) => {
+        setIsError(false);
+        setUrl(`https://api.weatherbit.io/v2.0/current?city=${city},${state}&key=${API_KEY}`);
     }
 
 
@@ -28,7 +36,7 @@ export default function App(){
         <main>
             <Header />
             <SearchBar onclick={onSearch} />
-            <Card weather={weather}  />
+            <Card error= {isError} realTimeWeather={realTimeWeather}  />
         </main>
     )
 }

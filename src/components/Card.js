@@ -1,31 +1,37 @@
 import React, {useState} from 'react';
 import {StyledCard} from './styled/Card.styled';
+import {img_icon} from '../utility/img_icon';
 
-export default function Card({weather}){
+
+export default function Card({realTimeWeather, error}){
 
     const [date] = useState(Date().split(' '));
 
+    
 
     return(
         <StyledCard>
-            {weather ? 
+            {realTimeWeather && realTimeWeather.weather && !error ? 
             <>
                 <div className="card-container">
-                    <h3 className='card-city'>{weather.city_name}</h3>
-                    <h2 className='card-temp'>{weather.temp >= -1 ? Math.round(weather.temp) : `-${Math.round(weather.temp)}`}°C</h2>
-                    <p><i className='card-icon ri-sun-line'></i></p>
-                    <p className='card-description'>Clear Sky</p>
+                    <h3 className='card-city'>{realTimeWeather.city_name}</h3>
+                    <h2 className='card-temp'>{realTimeWeather.temp >= -1 ? Math.round(realTimeWeather.temp) : `-${Math.round(realTimeWeather.temp)}`}°C</h2>
+                    <img src={img_icon[realTimeWeather.weather.icon]} alt='' />
+                    <p className='card-description'>{realTimeWeather.weather.description}</p>
                     <p className='card-time'>{`${formatDate(date)} ${formatTime(date)}`}</p>
                     <div className="card-sub-container">
-                        <p className='card-wind'>Wind {weather.wind_spd && weather.wind_spd.toFixed(2)} m/s</p>
-                        <p className='card-pressure'>Pressure {weather.pres} mb</p>
-                        <p className='card-humidity'>Humidity {weather.rh}%</p>
-                        <p className='card-cloudiness'>Cloudiness {weather.clouds}%</p>
+                        <p className='card-wind'>Wind {realTimeWeather.wind_spd && realTimeWeather.wind_spd.toFixed(2)} m/s</p>
+                        <p className='card-pressure'>Pressure {realTimeWeather.pres} mb</p>
+                        <p className='card-humidity'>Humidity {realTimeWeather.rh}%</p>
+                        <p className='card-cloudiness'>Cloudiness {realTimeWeather.clouds}%</p>
                     </div>
                 </div>
             </>
             :
             <>
+                <div className="card-container">
+                    <p className='card-error'>{`something went wrong, try again.`}</p>
+                </div>
             </>
             }
             
@@ -49,6 +55,8 @@ const formatDate = (date) =>{
             return 'Friday';
         case 'Sat':
             return 'Saturday';
+        default:
+            return null;
 
     }
 }
