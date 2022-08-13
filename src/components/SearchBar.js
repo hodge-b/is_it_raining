@@ -20,7 +20,7 @@ export default function SearchBar({onclick}){
     return(
         <StyledSearchBar className="search">
             <div className="search-container">
-                <input type="text" name='location' value={data} onChange={updateData} placeholder='oakville,Ontario'/>
+                <input type="text" name='location' value={data} onChange={updateData} placeholder='oakville, ontario'/>
                 <i className='ri-search-line' onClick={event => onclick(city, state)}></i>
             </div>
         </StyledSearchBar>
