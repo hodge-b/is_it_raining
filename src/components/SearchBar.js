@@ -13,7 +13,7 @@ export default function SearchBar({onclick, onEnterPress}){
 
     useEffect(() => {
         setCity(data.substring(0, data.indexOf(',')));
-        setState(data.substring(data.trim().indexOf(',') + 1));
+        setState(data.substring(data.indexOf(',') + 1));
     }, [updateData]);
     
     //console.log(data);

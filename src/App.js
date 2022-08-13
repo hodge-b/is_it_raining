@@ -39,7 +39,7 @@ export default function App(){
 
     const onSearch = (city, state) => {
         setIsError(false);
-        dispatch( {type: 'newURL', payload: `https://api.weatherbit.io/v2.0/current?city=${city},${state}&key=${API_KEY}`});
+        dispatch( {type: 'newURL', payload: `https://api.weatherbit.io/v2.0/current?city=${city.toLowerCase()},${checkForStateAlphaCode(state.toLowerCase().trim())}&key=${API_KEY}`});
     }
 
     const handleEnterPress = (e, city, state) => {
@@ -56,4 +56,38 @@ export default function App(){
             <Card error= {isError} realTimeWeather={state.realTimeWeather}  />
         </main>
     )
+}
+
+const checkForStateAlphaCode = state => {
+    switch(state){
+        // canadian provinces
+        case 'nl':
+            return 'newfoundland';
+        case 'pe':
+            return 'prince edward island';
+        case 'ns':
+            return 'nova scotia';
+        case 'nb':
+            return 'new brunswick';
+        case 'on':
+            return 'ontario';
+        case 'qc':
+            return 'quebec';
+        case 'mb':
+            return 'manitoba';
+        case 'sk':
+            return 'saskatchewan';
+        case 'ab':
+            return 'alberta';
+        case 'bc':
+            return 'british columbia';
+        case 'yt':
+            return 'yukon';
+        case 'nt':
+            return 'northwest territories';
+        case 'nu':
+            return 'nunavut';
+        default:
+            return state;
+    }
 }
