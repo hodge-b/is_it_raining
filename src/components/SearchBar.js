@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { StyledSearchBar } from './styled/SearchBar.styled';
 
-export default function SearchBar({onclick}){
+export default function SearchBar({onclick, onEnterPress}){
 
     const [data, setData] = useState('')
     const [city, setCity] = useState('');
@@ -20,8 +20,14 @@ export default function SearchBar({onclick}){
     return(
         <StyledSearchBar className="search">
             <div className="search-container">
-                <input type="text" name='location' value={data} onChange={updateData} placeholder='oakville, ontario'/>
-                <i className='ri-search-line' onClick={event => onclick(city, state)}></i>
+                <input 
+                    type="text" 
+                    name='location' 
+                    value={data} 
+                    onChange={updateData} 
+                    onKeyPress={e => onEnterPress(e, city, state)}
+                    placeholder='oakville, ontario'/>
+                <i className='ri-search-line' onClick={e => onclick(city, state)}></i>
             </div>
         </StyledSearchBar>
     )

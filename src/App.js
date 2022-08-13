@@ -11,7 +11,6 @@ import {API_KEY} from './utility/api';
 
 
 export default function App(){
-    const [city, setCity] = useState('');
     const [url, setUrl] = useState(`https://api.weatherbit.io/v2.0/current?city=oakville,ontario&key=${API_KEY}`);
     const [realTimeWeather, setRealTimeWeather] = useState([]);
     const [isError, setIsError] = useState(false);
@@ -31,11 +30,17 @@ export default function App(){
         setUrl(`https://api.weatherbit.io/v2.0/current?city=${city},${state}&key=${API_KEY}`);
     }
 
+    const handleEnterPress = (e, city, state) => {
+        if(e.key === 'Enter'){
+            onSearch(city, state);
+        }
+    }
+
 
     return(
         <main>
             <Header />
-            <SearchBar onclick={onSearch} />
+            <SearchBar onclick={onSearch} onEnterPress={handleEnterPress} />
             <Card error= {isError} realTimeWeather={realTimeWeather}  />
         </main>
     )
