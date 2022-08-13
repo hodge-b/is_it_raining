@@ -7,8 +7,6 @@ export default function Card({realTimeWeather, error}){
 
     const [date] = useState(Date().split(' '));
 
-    
-
     return(
         <StyledCard>
             {realTimeWeather && realTimeWeather.weather && !error ? 
