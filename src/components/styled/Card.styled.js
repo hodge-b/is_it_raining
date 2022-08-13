@@ -23,6 +23,7 @@ export const StyledCard = styled.section`
         font-weight: 300;
     }
     .card-city{
+        margin: 1rem 0;
         font-size: 1.5rem;
     }
     .card-temp{
@@ -51,7 +52,7 @@ export const StyledCard = styled.section`
         font-weight: 200;
         font-size: .8rem;
     }
-    .card-sub-container > * {
+    .card-sub-content > * {
         margin: .5rem 0;
     }
     .card-error{
